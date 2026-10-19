@@ -1,5 +1,7 @@
 import unittest
-from src.task_manager import add_task, delete_task, filter_tasks_by_status, complete_task
+from src.task_manager import (
+    add_task, delete_task, filter_tasks_by_status, complete_task
+)
 from src.file_handler import save_tasks, load_tasks
 from src.task import Task
 import os
@@ -95,9 +97,10 @@ class TestTaskManager(unittest.TestCase):
         self.assertEqual(len(loaded_tasks), 1)
         self.assertEqual(loaded_tasks[0].title, "Persistent Task")
 
+
     def test_complete_tasks(self):
         """
-        Test method used to change status of pending tasks to completed.
+        Test method used to change status of pending tasks to complete.
         """
         add_task(self.tasks, "Pending Task", "Description", "19-10-2026")
         self.assertEqual(self.tasks[0].status, "pending")
