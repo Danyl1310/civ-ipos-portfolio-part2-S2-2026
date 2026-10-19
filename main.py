@@ -1,7 +1,22 @@
 from src.task_manager import add_task, delete_task, list_tasks, complete_task
 from src.file_handler import load_tasks
 
+#functions
+def show_list_options(tasks):
+    print("\nWhat Tasks do you want listed?")
+    print("1. All Tasks")
+    print("2. Pending Tasks")
+    print("3. Completed Tasks")
 
+    choice = input("Enter your choice: ")
+    if choice == "1":
+        list_tasks(tasks)
+    elif choice == "2":
+        list_tasks(tasks, "pending")
+    elif choice == "3":
+        list_tasks(tasks, "completed")
+
+#main function
 def main():
     tasks = load_tasks()
     while True:
@@ -29,18 +44,7 @@ def main():
             else:
                 print("Task not found.")
         elif choice == "4":
-            print("\nWhat Tasks do you want listed?")
-            print("1. All Tasks")
-            print("2. Pending Tasks")
-            print("3. Completed Tasks")
-
-            choice = input("Enter your choice: ")
-            if choice == "1":
-                list_tasks(tasks)
-            elif choice == "2":
-                list_tasks(tasks, "pending")
-            elif choice == "3":
-                list_tasks(tasks, "completed")
+            show_list_options(tasks)
         elif choice == "5":
             print("Exiting Task Manager.")
             break
