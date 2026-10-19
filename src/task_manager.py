@@ -109,6 +109,7 @@ def filter_tasks_by_status(tasks, status):
     """
     return [task for task in tasks if task.status == status]
 
+
 def complete_task(tasks, title):
     """
     Change the status of a task from pending to completed based on its title.
