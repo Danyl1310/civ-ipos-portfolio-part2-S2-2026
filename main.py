@@ -29,7 +29,18 @@ def main():
             else:
                 print("Task not found.")
         elif choice == "4":
-            list_tasks(tasks)
+            print("\nWhat Tasks do you want listed?")
+            print("1. All Tasks")
+            print("2. Pending Tasks")
+            print("3. Completed Tasks")
+
+            choice = input("Enter your choice: ")
+            if choice == "1":
+                list_tasks(tasks)
+            elif choice == "2":
+                list_tasks(tasks, "pending")
+            elif choice == "3":
+                list_tasks(tasks, "completed")
         elif choice == "5":
             print("Exiting Task Manager.")
             break
