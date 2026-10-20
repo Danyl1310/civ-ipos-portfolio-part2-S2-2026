@@ -1,6 +1,7 @@
 from src.task import Task
 from src.file_handler import save_tasks
 from datetime import datetime
+from dateutil import parser
 
 
 def add_task(tasks, title, description, due_date):
@@ -108,3 +109,20 @@ def filter_tasks_by_status(tasks, status):
         list: A list of Task objects that match the specified status.
     """
     return [task for task in tasks if task.status == status]
+
+def to_datetime(value):
+    """
+    Converts strings to datetime objects with a flexible number of formats.
+
+    Args:
+        value (str): Input Value to be converted.
+
+    Returns:
+        datetime: the converted value.
+    """
+    if value is None or hasattr(value, "year"):
+        return value
+    try:
+        return parser.parse(value, dayfirst=True)
+    except (parser.ParserError, OverflowError):
+        return False
