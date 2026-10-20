@@ -5,7 +5,7 @@ class Task:
     Attributes:
         title (str): The title of the task.
         description (str): A brief description of the task.
-        due_date (str): The due date of the task in 'DD-MM-YYYY' format.
+        due_date (datetime): The due date of the task in 'DD-MM-YYYY' format.
         status (str): The current status of the task, defaults to 'pending'.
     """
 
