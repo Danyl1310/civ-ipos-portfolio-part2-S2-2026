@@ -30,12 +30,12 @@ def add_task(tasks, title, description, due_date):
 
     # Validate due date format
     try:
-        datetime.strptime(due_date, "%d-%m-%Y")
+        converted_date = to_datetime(due_date)
     except ValueError:
-        print("Error: Invalid date format. Use DD-MM-YYYY.")
+        print("Error: Invalid date format. Use Australian date order.")
         return False
 
-    tasks.append(Task(title, description, due_date))
+    tasks.append(Task(title, description, converted_date))
     save_tasks(tasks)
     return True
 
