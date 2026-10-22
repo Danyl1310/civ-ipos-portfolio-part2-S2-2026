@@ -65,6 +65,11 @@ class Task:
 
     @property
     def due_date_display(self):
+        """
+        Property for displaying the due date of the task.
+        Returns:
+            str: representing the existing due date value of the task.
+        """
         if not self.due_date:
             return "No Due Date"
         elif isinstance(self.due_date, datetime):
@@ -73,10 +78,20 @@ class Task:
 
     @property
     def date_created_display(self):
+        """
+        used to display the creation date private property
+        Returns:
+            str: Of the date created.
+        """
         return self._date_created.strftime("%d-%m-%Y")
 
     @property
     def time_left(self):
+        """
+        to display in human-readable text the time left for a due date.
+        Returns:
+            str: represents the time left or time overdue relative to the due date.
+        """
         if self.due_date is None:
             return "Null"
         due = self.due_date.date()
