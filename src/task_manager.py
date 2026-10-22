@@ -96,7 +96,7 @@ def list_tasks(tasks, status=None):
         print(
             f"{task.title} | {task.description} | "
             f"Due: {task.due_date_display} | Status: {task.status} |"
-            f" Created: {task.date_created_display} | Days Left: {task.days_left}"
+            f" Created: {task.date_created_display} | {task.time_left}"
         )
 
 
