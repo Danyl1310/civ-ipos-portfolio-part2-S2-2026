@@ -1,8 +1,12 @@
 import unittest
+
+from dateutil.relativedelta import relativedelta
+
 from src.task_manager import add_task, delete_task, filter_tasks_by_status
 from src.file_handler import save_tasks, load_tasks
 from src.task import Task
 import os
+from datetime import date
 
 TEST_FILE = "test_tasks.bin"
 
@@ -94,6 +98,19 @@ class TestTaskManager(unittest.TestCase):
         loaded_tasks = load_tasks()
         self.assertEqual(len(loaded_tasks), 1)
         self.assertEqual(loaded_tasks[0].title, "Persistent Task")
+
+    def test_list_tasks(self):
+        """
+        Test the CLI output for when the method list tasks is called upon
+        """
+        test_date = str(date.today() + relativedelta(days=5))
+        add_task(self.tasks, "Test Task", "Test Description", test_date)
+        self.assertEqual(self.test_list_tasks(),
+            f"Test Task | Test Description | "
+            f"Due: {test_date} | Status: pending | "
+            f"Created: {date.today()} | "
+            f"Time Left: 0 years, 0 months, 5 days"
+        )
 
 
 if __name__ == "__main__":
