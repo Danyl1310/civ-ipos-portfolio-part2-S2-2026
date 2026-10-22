@@ -95,7 +95,8 @@ def list_tasks(tasks, status=None):
     for task in filtered:
         print(
             f"{task.title} | {task.description} | "
-            f"Due: {task.due_date_display} | Status: {task.status}"
+            f"Due: {task.due_date_display} | Status: {task.status} |"
+            f" Created: {task.date_display}"
         )
 
 

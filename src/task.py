@@ -26,6 +26,7 @@ class Task:
         self.description = description
         self.due_date = due_date
         self.status = status
+        self._date_created = datetime.today()
 
     def to_dict(self):
         """
@@ -69,3 +70,7 @@ class Task:
         elif isinstance(self.due_date, datetime):
             return self.due_date.strftime("%d/%m/%Y")
         else: return "ERROR: attr due_date is not datetime obj."
+
+    @property
+    def date_created_display(self):
+        return self._date_created.strftime("%d/%m/%Y")
