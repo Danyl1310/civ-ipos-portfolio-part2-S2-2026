@@ -25,7 +25,7 @@ class Task:
         """
         self.title = title
         self.description = description
-        self.due_date = parse(due_date, dayfirst=True).date() if due_date else None
+        self.due_date = due_date
         self.status = status
         self._date_created = datetime.today()
 
