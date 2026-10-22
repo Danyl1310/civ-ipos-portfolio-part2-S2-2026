@@ -1,6 +1,5 @@
-from datetime import datetime
+from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
-from dateutil.parser import parse
 
 class Task:
     """
@@ -77,7 +76,13 @@ class Task:
         return self._date_created.strftime("%d/%m/%Y")
 
     @property
-    def days_left(self):
+    def time_left(self):
         if self.due_date is None:
             return "Null"
-        return (self.due_date - datetime.today()).days
+        overdue = self.due_date.date() < date.today()
+        if overdue:
+            delta = relativedelta(date.today(), self.due_date)
+        else:
+            delta = relativedelta(self.due_date, datetime.today())
+        text = f"{delta.years} years, {delta.months} months, {delta.days} days"
+        return f"Time Overdue: {text}" if overdue else f"Time Left: {text}"
