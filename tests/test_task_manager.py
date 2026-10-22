@@ -2,11 +2,15 @@ import unittest
 
 from dateutil.relativedelta import relativedelta
 
-from src.task_manager import add_task, delete_task, filter_tasks_by_status
+from src.task_manager import (
+    add_task, delete_task, filter_tasks_by_status, list_tasks
+)
 from src.file_handler import save_tasks, load_tasks
 from src.task import Task
 import os
 from datetime import date
+import io
+from contextlib import redirect_stdout
 
 TEST_FILE = "test_tasks.bin"
 
@@ -61,7 +65,7 @@ class TestTaskManager(unittest.TestCase):
         Test adding a task with an invalid due date format.
         Verify that the function handles invalid input gracefully and returns False.
         """
-        result = add_task(self.tasks, "Test Task", "Description", "2024-12-01")
+        result = add_task(self.tasks, "Test Task", "Description", "32-12-2024")
         self.assertFalse(result)
 
     def test_delete_task(self):
@@ -101,16 +105,22 @@ class TestTaskManager(unittest.TestCase):
 
     def test_list_tasks(self):
         """
-        Test the CLI output for when the method list tasks is called upon
+        Test the output of list_tasks function.
         """
-        test_date = str(date.today() + relativedelta(days=5))
+        test_date = (date.today() + relativedelta(days=5)).strftime("%d-%m-%Y")
         add_task(self.tasks, "Test Task", "Test Description", test_date)
-        self.assertEqual(self.test_list_tasks(),
-            f"Test Task | Test Description | "
-            f"Due: {test_date} | Status: pending | "
-            f"Created: {date.today()} | "
-            f"Time Left: 0 years, 0 months, 5 days"
-        )
+
+        buffer = io.StringIO()
+
+        with redirect_stdout(buffer):
+            list_tasks(self.tasks)
+
+        expected = f"Test Task | Test Description | "\
+                   f"Due: {test_date} | Status: pending | "\
+                   f"Created: {date.today().strftime("%d-%m-%Y")} | "\
+                   f"Time Left: 0 years, 0 months, 5 days\n"
+
+        self.assertEqual(buffer.getvalue(), expected)
 
 
 if __name__ == "__main__":

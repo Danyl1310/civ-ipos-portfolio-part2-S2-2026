@@ -68,21 +68,22 @@ class Task:
         if not self.due_date:
             return "No Due Date"
         elif isinstance(self.due_date, datetime):
-            return self.due_date.strftime("%d/%m/%Y")
+            return self.due_date.strftime("%d-%m-%Y")
         else: return "ERROR: attr due_date is not datetime obj."
 
     @property
     def date_created_display(self):
-        return self._date_created.strftime("%d/%m/%Y")
+        return self._date_created.strftime("%d-%m-%Y")
 
     @property
     def time_left(self):
         if self.due_date is None:
             return "Null"
-        overdue = self.due_date.date() < date.today()
+        due = self.due_date.date()
+        overdue = due < date.today()
         if overdue:
-            delta = relativedelta(date.today(), self.due_date)
+            delta = relativedelta(date.today(), due)
         else:
-            delta = relativedelta(self.due_date, datetime.today())
+            delta = relativedelta(due, date.today())
         text = f"{delta.years} years, {delta.months} months, {delta.days} days"
         return f"Time Overdue: {text}" if overdue else f"Time Left: {text}"
