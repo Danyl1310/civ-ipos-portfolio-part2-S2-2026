@@ -1,5 +1,6 @@
 from datetime import datetime
-
+from dateutil.relativedelta import relativedelta
+from dateutil.parser import parse
 
 class Task:
     """
@@ -24,7 +25,7 @@ class Task:
         """
         self.title = title
         self.description = description
-        self.due_date = due_date
+        self.due_date = parse(due_date, dayfirst=True).date() if due_date else None
         self.status = status
         self._date_created = datetime.today()
 
@@ -74,3 +75,9 @@ class Task:
     @property
     def date_created_display(self):
         return self._date_created.strftime("%d/%m/%Y")
+
+    @property
+    def days_left(self):
+        if self.due_date is None:
+            return "Null"
+        return (self.due_date - datetime.today()).days
