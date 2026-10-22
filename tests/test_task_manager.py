@@ -115,9 +115,10 @@ class TestTaskManager(unittest.TestCase):
         with redirect_stdout(buffer):
             list_tasks(self.tasks)
 
+        today = date.today().strftime("%d-%m-%Y")
         expected = f"Test Task | Test Description | "\
                    f"Due: {test_date} | Status: pending | "\
-                   f"Created: {date.today().strftime("%d-%m-%Y")} | "\
+                   f"Created: {today} | "\
                    f"Time Left: 0 years, 0 months, 5 days\n"
 
         self.assertEqual(buffer.getvalue(), expected)
