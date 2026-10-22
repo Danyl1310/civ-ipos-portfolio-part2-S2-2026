@@ -1,6 +1,5 @@
 from src.task import Task
 from src.file_handler import save_tasks
-from datetime import datetime
 from dateutil import parser
 
 
@@ -30,10 +29,10 @@ def add_task(tasks, title, description, due_date):
 
     # Validate due date format
     if not due_date.strip():
-        converted_date = None # Accepts nothing e.g "no date set"
+        converted_date = None  # Accepts nothing e.g "no date set"
     else:
         converted_date = to_datetime(due_date)
-        if not converted_date: #if conversion fails
+        if not converted_date:  # if conversion fails
             print("Error: Invalid date format. Use Australian date order.")
             return False
 
@@ -112,6 +111,7 @@ def filter_tasks_by_status(tasks, status):
         list: A list of Task objects that match the specified status.
     """
     return [task for task in tasks if task.status == status]
+
 
 def to_datetime(value):
     """

@@ -1,6 +1,7 @@
 from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 
+
 class Task:
     """
     A class to represent a task in the task management application.
@@ -62,7 +63,6 @@ class Task:
             task_data.get("status", "pending")
         )
 
-
     @property
     def due_date_display(self):
         """
@@ -74,7 +74,8 @@ class Task:
             return "No Due Date"
         elif isinstance(self.due_date, datetime):
             return self.due_date.strftime("%d-%m-%Y")
-        else: return "ERROR: attr due_date is not datetime obj."
+        else:
+            return "ERROR: attr due_date is not datetime obj."
 
     @property
     def date_created_display(self):
