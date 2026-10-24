@@ -21,5 +21,4 @@ python-dateutil==2.9.0.post0
 setuptools==84.0.0
 six==1.17.0
 snowballstemmer==3.1.1
--e git+https://github.com/Danyl1310/civ-ipos-portfolio-part2-S2-2026.git@9fa3c49d47d4ae1ebe6e9fd91f0eee7f01333143#egg=task_manager_cli
 tzdata==2026.5
