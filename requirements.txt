@@ -9,7 +9,6 @@ flake8-print==5.0.0
 flake8_import_order==0.19.2
 iniconfig==2.3.0
 mccabe==0.7.0
-numpy==2.5.3
 packaging==26.3
 pep8-naming==0.15.1
 pluggy==1.6.0
