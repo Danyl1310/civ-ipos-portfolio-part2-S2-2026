@@ -1,14 +1,12 @@
 import unittest
 
-from dateutil.relativedelta import relativedelta
-
 from src.task_manager import (
     add_task, delete_task, filter_tasks_by_status, list_tasks
 )
 from src.file_handler import save_tasks, load_tasks
 from src.task import Task
 import os
-from datetime import date
+from datetime import date, timedelta
 import io
 from contextlib import redirect_stdout
 
@@ -107,7 +105,7 @@ class TestTaskManager(unittest.TestCase):
         """
         Test the output of list_tasks function.
         """
-        test_date = (date.today() + relativedelta(days=5)).strftime("%d-%m-%Y")
+        test_date = (date.today() + timedelta(days=5)).strftime("%d-%m-%Y")
         add_task(self.tasks, "Test Task", "Test Description", test_date)
 
         buffer = io.StringIO()
