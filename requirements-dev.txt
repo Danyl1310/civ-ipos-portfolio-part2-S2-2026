@@ -1,8 +1,9 @@
+python-dateutil
 flake8
-flake8-bugbear
 flake8-annotations
-pep8-naming
-flake8-import-order
+flake8-bugbear
 flake8-docstrings
 flake8-print
-pydocstyle
+flake8-import-order
+pep8-naming
+pytest

@@ -1,6 +1,6 @@
 from src.task import Task
 from src.file_handler import save_tasks
-from datetime import datetime
+from dateutil import parser
 
 
 def add_task(tasks, title, description, due_date):
@@ -28,13 +28,15 @@ def add_task(tasks, title, description, due_date):
         return False
 
     # Validate due date format
-    try:
-        datetime.strptime(due_date, "%d-%m-%Y")
-    except ValueError:
-        print("Error: Invalid date format. Use DD-MM-YYYY.")
-        return False
+    if not due_date.strip():
+        converted_date = None  # Accepts nothing e.g "no date set"
+    else:
+        converted_date = to_datetime(due_date)
+        if not converted_date:  # if conversion fails
+            print("Error: Invalid date format. Use Australian date order.")
+            return False
 
-    tasks.append(Task(title, description, due_date))
+    tasks.append(Task(title, description, converted_date))
     save_tasks(tasks)
     return True
 
@@ -92,7 +94,8 @@ def list_tasks(tasks, status=None):
     for task in filtered:
         print(
             f"{task.title} | {task.description} | "
-            f"Due: {task.due_date} | Status: {task.status}"
+            f"Due: {task.due_date_display} | Status: {task.status} |"
+            f" Created: {task.date_created_display} | {task.time_left}"
         )
 
 
@@ -108,3 +111,21 @@ def filter_tasks_by_status(tasks, status):
         list: A list of Task objects that match the specified status.
     """
     return [task for task in tasks if task.status == status]
+
+
+def to_datetime(value):
+    """
+    Converts strings to datetime objects with a flexible number of formats.
+
+    Args:
+        value (str): Input Value to be converted.
+
+    Returns:
+        datetime: the converted value.
+    """
+    if value is None or hasattr(value, "year"):
+        return value
+    try:
+        return parser.parse(value, dayfirst=True)
+    except (parser.ParserError, OverflowError):
+        return False
