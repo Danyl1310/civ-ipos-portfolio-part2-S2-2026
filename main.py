@@ -1,7 +1,8 @@
 from src.task_manager import add_task, delete_task, list_tasks, complete_task
 from src.file_handler import load_tasks
 
-#functions
+
+# functions
 def show_list_options(tasks):
     print("\nWhat Tasks do you want listed?")
     print("1. All Tasks")
@@ -17,7 +18,19 @@ def show_list_options(tasks):
         list_tasks(tasks, "completed")
 
 
-#main function
+def choice_complete_task(tasks):
+    title = input("Title of the task to complete: ")
+    if complete_task(tasks, title):
+        print(f"Task: {title}. is now completed.")
+
+
+def choice_delete_task(tasks):
+    title = input("Title of the task to delete: ")
+    if delete_task(tasks, title):
+        print("Task deleted successfully.")
+
+
+# main function
 def main():
     tasks = load_tasks()
     while True:
@@ -35,13 +48,9 @@ def main():
             due_date = input("Due Date (DD-MM-YYYY): ")
             add_task(tasks, title, description, due_date)
         elif choice == "2":
-            title = input("Title of the task to complete: ")
-            if complete_task(tasks, title):
-                print(f"Task: {title}. is now completed.")
+            choice_complete_task(tasks)
         elif choice == "3":
-            title = input("Title of the task to delete: ")
-            if delete_task(tasks, title):
-                print("Task deleted successfully.")
+            choice_delete_task(tasks)
         elif choice == "4":
             show_list_options(tasks)
         elif choice == "5":
