@@ -16,6 +16,7 @@ def show_list_options(tasks):
     elif choice == "3":
         list_tasks(tasks, "completed")
 
+
 #main function
 def main():
     tasks = load_tasks()
@@ -41,8 +42,6 @@ def main():
             title = input("Title of the task to delete: ")
             if delete_task(tasks, title):
                 print("Task deleted successfully.")
-            else:
-                print("Task not found.")
         elif choice == "4":
             show_list_options(tasks)
         elif choice == "5":

@@ -97,7 +97,6 @@ class TestTaskManager(unittest.TestCase):
         self.assertEqual(len(loaded_tasks), 1)
         self.assertEqual(loaded_tasks[0].title, "Persistent Task")
 
-
     def test_complete_tasks(self):
         """
         Test method used to change status of pending tasks to complete.
@@ -109,6 +108,7 @@ class TestTaskManager(unittest.TestCase):
         self.assertEqual(self.tasks[0].status, "completed")
         result2 = complete_task(self.tasks, "Pending Task")
         self.assertFalse(result2)
+
 
 if __name__ == "__main__":
     unittest.main()
