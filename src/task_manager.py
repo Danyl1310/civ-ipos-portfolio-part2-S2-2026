@@ -129,3 +129,24 @@ def to_datetime(value):
         return parser.parse(value, dayfirst=True)
     except (parser.ParserError, OverflowError):
         return False
+      
+      
+def complete_task(tasks, title):
+    """
+    Change the status of a task from pending to completed based on its title.
+    Args:
+        tasks (list): The list of existing Task objects.
+        title (str): The title of the task that will have its status changed:
+
+    Returns:
+        True if the task is found and changed, otherwise False.
+
+    Side Effects:
+        - Saves the updated task list to a file using `save_tasks`.
+    """
+    for task in tasks:
+        if task.title == title and task.status == "pending":
+            task.status = "completed"
+            save_tasks(tasks)
+            return True
+    return False
