@@ -129,8 +129,8 @@ def to_datetime(value):
         return parser.parse(value, dayfirst=True)
     except (parser.ParserError, OverflowError):
         return False
-      
-      
+
+
 def complete_task(tasks, title):
     """
     Change the status of a task from pending to completed based on its title.
