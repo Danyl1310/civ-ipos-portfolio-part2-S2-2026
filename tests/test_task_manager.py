@@ -119,8 +119,7 @@ class TestTaskManager(unittest.TestCase):
                    f"Time Left: 0 years, 0 months, 5 days\n"
 
         self.assertEqual(buffer.getvalue(), expected)
-        
-        
+
     def test_complete_tasks(self):
         """
         Test method used to change status of pending tasks to complete.
